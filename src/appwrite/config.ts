@@ -45,7 +45,7 @@ export class AppwriteService{
             const data = await this.getCurrentUser();
             return Boolean(data) //! This will return true if the data is present else will return the false
         } catch (error) {
-            
+            //? Nothing
         }
         return false
     }
@@ -57,5 +57,15 @@ export class AppwriteService{
         }
         return null;
     }
-    async logout(){}
+    async logout(){
+        try {
+            return await account.deleteSession("current");
+        } catch (error: any) {
+            console.log("Logout Error: ", error);
+        }
+    }
 }
+
+const appwriteService = new AppwriteService()
+
+export default appwriteService; //* Exporting directly the object so that to directly use the functionalities.
